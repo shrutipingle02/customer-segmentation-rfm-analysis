@@ -165,7 +165,7 @@ different grains**:
 
 They are not joined or blended. Joining them repeats each customer once per
 transaction and every total inflates . every sheet is built on whichever source
-has the right grain. Any customer count comes from Customers; only Top 10
+has the right grain. Any customer count comes from Customers ,only Top 10
 Products and the sparklines use Transactions.
 
 **Dashboard 1 — RFM Analysis.** Two KPIs with sparklines, sales by age, wealth
@@ -196,8 +196,6 @@ RFM Analysis.ipynb                  scoring, segmentation, exploration, export
 *_Cleaned.csv                       cleaning outputs
 Customer_Trans_RFM_Analysis.csv     3,490 customers x 29 columns — the Tableau feed
 cutomer-segmentation-dashboard.twbx packaged workbook, both dashboards
-TABLEAU_BUILD_GUIDE.md              every sheet, field and layout setting
-TABLEAU_PROGRESS.md                 build log
 icons/                              navigation and info icons used in the dashboards
 ```
 
