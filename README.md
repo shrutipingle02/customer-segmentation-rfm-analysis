@@ -130,7 +130,7 @@ turn out not to be:
   buyer, not necessarily a rich one.
 
 Each splits the base into two halves of similar size and similar behaviour, so
-none is a basis for targeting. Behaviour separates the customers; demography does
+none is a basis for targeting. Behaviour separates the customers, demography does
 not.
 
 ## Limitations
@@ -144,7 +144,7 @@ not.
 2. **The combined score is a concatenation, not a magnitude.** A frequent,
    high-value customer who has drifted away scores 344; a recent one-off buyer
    who spent almost nothing scores 411. Both land in *Recent Customer*.
-3. **Frequency and monetary are strongly correlated** — buying more times
+3. **Frequency and monetary are strongly correlated**  buying more times
    generates more margin. The three measures carry less independent information
    than three measures imply.
 4. **One year of transactions.** A customer who bought heavily in 2016 and
@@ -164,20 +164,19 @@ different grains**:
 | Transactions | `Transactions_Cleaned.csv` | 19,801 | one row per transaction |
 
 They are not joined or blended. Joining them repeats each customer once per
-transaction and every total inflates — every sheet is built on whichever source
+transaction and every total inflates . every sheet is built on whichever source
 has the right grain. Any customer count comes from Customers; only Top 10
 Products and the sparklines use Transactions.
 
 **Dashboard 1 — RFM Analysis.** Two KPIs with sparklines, sales by age, wealth
 segment, industry and state, a map of the customer base, top 10 products, the
-segment table, and an RFM scatter with a parameter that swaps the x-axis between
+segment table and an RFM scatter with a parameter that swaps the x-axis between
 recency and frequency.
 
 **Dashboard 2 — Customer Information.** The customer-level detail table behind
-the summary, with nine filters, and navigation buttons both ways.
+the summary, with nine filters and navigation buttons both ways.
 
-Workbook: `cutomer-segmentation-dashboard.twbx`. Not yet published to Tableau
-Public.
+Workbook: `cutomer-segmentation-dashboard.twbx`. 
 
 ## Reproducing it
 
@@ -186,16 +185,7 @@ pip install pandas numpy matplotlib seaborn openpyxl jupyter
 jupyter notebook
 ```
 
-Run the four cleaning notebooks first — they write the `_Cleaned.csv` files that
-`RFM Analysis.ipynb` reads:
 
-1. `DQA and Data Cleaning Transactions.ipynb`
-2. `DQA and Data Cleaning CustomerDemographic.ipynb`
-3. `DQA and Data Cleaning Customer Address.ipynb`
-4. `DQA and Data Cleaning NewCustomerList.ipynb`
-5. `RFM Analysis.ipynb` — scores, segments, charts, and the Tableau export
-
-Then open the workbook, or rebuild it from `TABLEAU_BUILD_GUIDE.md`.
 
 ## Repository contents
 
@@ -213,10 +203,8 @@ icons/                              navigation and info icons used in the dashbo
 
 ## Tech stack
 
-Python, pandas, NumPy, Matplotlib, seaborn, openpyxl, Jupyter. Tableau Desktop
-2025.1 for the dashboards.
+Python, pandas, NumPy, Matplotlib, seaborn, openpyxl, Jupyter. 
+Tableau Desktop 2025.1 for the dashboards.
 
 ---
 
-If Tableau and `Customer_Trans_RFM_Analysis.csv` ever disagree, the CSV is right.
-The check figures are in `TABLEAU_BUILD_GUIDE.md`.
