@@ -74,7 +74,7 @@ After the data cleaning process, exploratory analysis on the dataset is performe
 - <b>Cars owned by States</b><br>
   - In New South Wales the proportion is almost even with 958 customers owning a car against 906 who do not.
   - In Queensland the split is exactly even at 371 each.
-  - In Victoria slightly more customers do not own a car at 443 against 437 who do.
+  - In Victoria slightly more customers do not own a car at 443 against 437 who  do.
   - Car ownership therefore separates nobody and the same holds for gender and wealth segment. Behaviour separates these customers and demography does not.
 
 ### 3. RFM Analysis and Customer Segmentation
