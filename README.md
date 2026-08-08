@@ -1,83 +1,40 @@
 # Customer Segmentation — RFM Analysis
 
-Four raw spreadsheets from an Australian bike retailer turned into **one row per
-customer carrying a named segment**, plus a two-page Tableau dashboard the
-marketing team can filter.
+**3,490 customers of an Australian bike retailer, sorted into 11 segments by how
+recently they bought, how often, and how much margin they left behind.**
 
-**One-line pitch:** The business has 1,000 prospects and a fixed marketing
-budget. Learn what a valuable customer looks like from the 3,490 who already buy,
-then say which of the existing base is worth keeping and which has already gone.
+![RFM Analysis dashboard](images/dashboard-1-rfm.png)
 
-```
-Raw_data.xlsx  ->  4 cleaning notebooks  ->  RFM scores  ->  11 segments  ->  Tableau dashboards
-```
+## What it found
 
-**Author:** Shruti Pingle
+- **Half the customer base is already leaving.** The five weakest segments hold
+  1,726 customers: 49% of the base and 44% of sales ($9.6M). Not a small tail to
+  write off.
+- **The best customers are a thin slice.** Platinum and Very Loyal together are
+  351 people, 10% of the base, 16% of sales. Losing a handful of them costs more
+  than losing a hundred at the bottom.
+- **Demographics don't separate anybody.** Gender, car ownership and wealth
+  segment each split the base into two halves that behave the same way. Mass
+  Customer is the biggest wealth band in every age group. Behaviour separates
+  these customers, demography does not.
 
----
-
-## The idea
-
-RFM groups customers by three behaviours taken from their own purchase history —
-how recently they bought, how often, and how much margin they generated. Each is
-scored 1–4 by quartile, the three scores combine into one number, and that number
-maps to a named segment.
-
-No model is trained here. The point of RFM is that it is transparent: every
-customer's segment can be explained by three numbers anyone in the business can
-check, which is worth more to a marketing team than a few points of accuracy from
-something they cannot read.
-
-The unit is the **customer**, not the transaction. A campaign is sent to a person,
-not to an order line.
-
-## Data
-
-| Table | Rows raw | Rows cleaned | What it is |
-|---|---|---|---|
-| `Transactions` | 20,000 | 19,801 | every 2017 order line |
-| `CustomerDemographic` | 4,000 | 3,997 | existing customers |
-| `CustomerAddress` | 3,999 | 3,993 | one address per customer |
-| `NewCustomerList` | 1,000 | 1,000 | prospects, no purchase history |
-
-Source: `Raw_data.xlsx` — Sprocket Central Pty Ltd, a bike-parts retailer trading
-in NSW, VIC and QLD. Transactions run **2017-01-01 to 2017-12-30**.
-
-**3,490 customers are scored** — the ones with at least one surviving transaction
-after cleaning. A customer in the demographics table who never bought has no
-recency, no frequency and no margin, so there is nothing to segment them on.
-
-### Cleaning decisions that move the numbers
-
-Each of the four notebooks documents every problem found, what was done, and why.
-The ones that change the final segment counts:
-
-- **179 cancelled transactions removed.** A cancellation is not a purchase, and
-  leaving them in credits customers for revenue that was never taken.
-- **197 transactions with no product record kept**, product fields filled
-  `Unknown`. The purchase happened; only the product is unknown. Their
-  `standard_cost` is left null rather than zeroed, so they count towards
-  frequency but not towards margin.
-- **Customer 34 removed** — date of birth 1843, an age of 174. **2 deceased
-  customers removed.**
-- **1,162 missing job titles/industries filled `Unknown`** rather than dropped.
-  `Unknown` is then shown on the charts as its own bar; hiding it would inflate
-  every other share.
-- **State standardised** — `NSW` and `New South Wales` were both in the file, 168
-  rows affected.
-- **Four customers have no address** (3, 10, 22, 23). They are kept, joined with a
-  LEFT join, and are simply absent from the map and state views. An inner join
-  would have deleted them silently.
+**So what.** Spend the retention budget on the 1,049 customers in the top four
+segments (30% of the base, 37% of sales). They are still active and worth
+keeping. The 300 in *Lost Customer* generate $738K between them, the smallest
+pool in the business, so win-back campaigns aimed there will not pay for
+themselves. And since demography doesn't predict value, the 1,000 new prospects
+can't be ranked from their profile alone. They need a first purchase before RFM
+can say anything.
 
 ## Method
 
 | Step | Choice |
 |---|---|
-| Recency reference | **last transaction in the data (Dec 2017)**, not today |
+| Recency reference | last transaction in the data (Dec 2017), not today |
 | Frequency | count of transactions per customer |
-| Monetary | **profit**, not revenue — `list_price − standard_cost` |
+| Monetary | **profit**, not revenue: `list_price − standard_cost` |
 | Scoring | quartiles 1–4, recency reversed |
-| Combination | `100·R + 10·F + M` |
+| Combination | `100·R + 10·F + M`, so recency carries the most weight |
 | Segments | 11 named bands over the combined score |
 
 **Why the reference date is the last transaction.** The data ends in December
@@ -155,13 +112,10 @@ not.
 
 ## Dashboards
 
-Two pages, built in Tableau Desktop 2025.1, connected to **two data sources at
-different grains**:
+Two pages in Tableau. The first is above, the second is the customer-level detail
+behind it, with nine filters.
 
-| Source | File | Rows | Grain |
-|---|---|---|---|
-| Customers | `Customer_Trans_RFM_Analysis.csv` | 3,490 | one row per customer |
-| Transactions | `Transactions_Cleaned.csv` | 19,801 | one row per transaction |
+![Customer Information dashboard](images/dashboard-2-customer-info.png)
 
 They are not joined or blended. Joining them repeats each customer once per
 transaction and every total inflates . every sheet is built on whichever source
@@ -178,7 +132,7 @@ the summary, with nine filters and navigation buttons both ways.
 
 Workbook: `cutomer-segmentation-dashboard.twbx`. 
 
-## Reproducing it
+## Run it
 
 ```bash
 pip install pandas numpy matplotlib seaborn openpyxl jupyter
