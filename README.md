@@ -149,5 +149,5 @@ The tools used in this project include:
 ## Built With
 - Python 3.8.2, Tableau Desktop 2025.1
 
-## Authors
-- Shruti Pingle - [Github Profile](https://github.com/shrutipingle02)
+## Author
+- Shruti Pingle
