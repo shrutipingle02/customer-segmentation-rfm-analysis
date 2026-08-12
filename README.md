@@ -11,13 +11,6 @@ The Sales Dashboard for Customer Segmentation is built in Tableau Desktop 2025.1
 
 The two pages read from two data sources at different grains. `Customer_Trans_RFM_Analysis.csv` holds 3,490 rows at one row per customer and `Transactions_Cleaned.csv` holds 19,801 rows at one row per transaction. They are deliberately not joined or blended because joining them repeats each customer once per transaction and inflates every total.
 
-<b>In case of failure of loading Jupyter Notebooks on Github, the following notebooks can be found in nbviewer. Click on the respective hyperlinks to view:</b>
-- [RFM Analysis.ipynb](https://nbviewer.jupyter.org/github/shrutipingle02/customer-segmentation-rfm-analysis/blob/main/RFM%20Analysis.ipynb)
-- [DQA and Data Cleaning CustomerDemographic.ipynb](https://nbviewer.jupyter.org/github/shrutipingle02/customer-segmentation-rfm-analysis/blob/main/DQA%20and%20Data%20Cleaning%20CustomerDemographic.ipynb)
-- [DQA and Data Cleaning NewCustomerList.ipynb](https://nbviewer.jupyter.org/github/shrutipingle02/customer-segmentation-rfm-analysis/blob/main/DQA%20and%20Data%20Cleaning%20NewCustomerList.ipynb)
-- [DQA and Data Cleaning Transactions.ipynb](https://nbviewer.jupyter.org/github/shrutipingle02/customer-segmentation-rfm-analysis/blob/main/DQA%20and%20Data%20Cleaning%20Transactions.ipynb)
-- [DQA and Data Cleaning Customer Address.ipynb](https://nbviewer.jupyter.org/github/shrutipingle02/customer-segmentation-rfm-analysis/blob/main/DQA%20and%20Data%20Cleaning%20Customer%20Address.ipynb)
-
 
 ## Analysis Approach
 ### 1. Data Quality Assessment and Data Cleaning
